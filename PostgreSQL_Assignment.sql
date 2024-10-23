@@ -58,14 +58,19 @@ SELECT * FROM enrollment
 
 
 -- 1. Insert a new student record with the following details:
-INSERT INTO students (student_id, student_name, age, email, frontend_mark,backend_mark, status) VALUES (7, 'Fahad', 23, 'fahad@mail.com', 55, 57, NULL)
+INSERT INTO students (student_id, student_name, age, email, frontend_mark,backend_mark, status) 
+VALUES (7, 'Fahad', 23, 'fahad@mail.com', 55, 57, NULL)
 
 -- 2. Retrieve the names of all students who are enrolled in the course titled 'Next.js'.
--- SELECT * FROM students WHERE
+SELECT student_name FROM students
+NATURAL JOIN enrollment 
+NATURAL JOIN courses 
+WHERE course_name = 'Next.js';
+
 
 -- 3. Update the status of the student with the highest total (frontend_mark + backend_mark) to 'Awarded'.
-UPDATE students SET status='Awarded' WHERE (frontend_mark+backend_mark) = 
-(SELECT max(frontend_mark+backend_mark) FROM students)
+UPDATE students SET status='Awarded' WHERE (frontend_mark + backend_mark) = 
+(SELECT max(frontend_mark + backend_mark) FROM students)
 
 -- 4. Delete all courses that have no students enrolled.
 DELETE FROM courses WHERE course_id NOT IN 
@@ -73,7 +78,8 @@ DELETE FROM courses WHERE course_id NOT IN
 
 
 -- 5. Retrieve the names of students using a limit of 2, starting from the 3rd student.
-SELECT student_id,student_name FROM students ORDER BY student_id LIMIT 2 OFFSET 2
+SELECT student_id,student_name FROM students 
+ORDER BY student_id LIMIT 2 OFFSET 2
 
 -- 6. Retrieve the course names and the number of students enrolled in each course.
 -- SELECT course_name,sum(student_id) FROM enrollment JOIN courses on courses.course_id=enrollment.course_id
@@ -82,4 +88,5 @@ SELECT student_id,student_name FROM students ORDER BY student_id LIMIT 2 OFFSET 
 SELECT avg(age) as average_age FROM students
 
 -- 8. Retrieve the names of students whose email addresses contain 'example.com'.
-SELECT * FROM students WHERE email LIKE '%example.com'
+SELECT * FROM students 
+WHERE email LIKE '%example.com'
