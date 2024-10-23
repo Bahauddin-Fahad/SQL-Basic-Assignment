@@ -61,6 +61,7 @@ SELECT * FROM enrollment
 INSERT INTO students (student_id, student_name, age, email, frontend_mark,backend_mark, status) 
 VALUES (7, 'Fahad', 23, 'fahad@mail.com', 55, 57, NULL)
 
+
 -- 2. Retrieve the names of all students who are enrolled in the course titled 'Next.js'.
 SELECT student_name FROM students
 NATURAL JOIN enrollment 
@@ -72,6 +73,7 @@ WHERE course_name = 'Next.js';
 UPDATE students SET status='Awarded' WHERE (frontend_mark + backend_mark) = 
 (SELECT max(frontend_mark + backend_mark) FROM students)
 
+
 -- 4. Delete all courses that have no students enrolled.
 DELETE FROM courses WHERE course_id NOT IN 
 (SELECT DISTINCT course_id FROM enrollment)
@@ -82,10 +84,19 @@ SELECT student_id,student_name FROM students
 ORDER BY student_id LIMIT 2 OFFSET 2
 
 -- 6. Retrieve the course names and the number of students enrolled in each course.
--- SELECT course_name,sum(student_id) FROM enrollment JOIN courses on courses.course_id=enrollment.course_id
+
+SELECT course.course_name, COUNT(enrollment.student_id) as students
+FROM courses
+LEFT JOIN enrollment ON courses.course_id = enrollment.course_id
+GROUP BY courses.course_name;
+
+
+
+
+
 
 -- 7. Calculate and display the average age of all students.
-SELECT avg(age) as average_age FROM students
+SELECT round(avg(age)) as average_age FROM students
 
 -- 8. Retrieve the names of students whose email addresses contain 'example.com'.
 SELECT * FROM students 
