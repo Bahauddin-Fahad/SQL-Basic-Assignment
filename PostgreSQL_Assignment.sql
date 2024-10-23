@@ -67,6 +67,8 @@ INSERT INTO students (student_id, student_name, age, email, frontend_mark,backen
 
 
 -- 4. Delete all courses that have no students enrolled.
+DELETE FROM courses WHERE course_id NOT IN 
+(SELECT DISTINCT course_id FROM enrollment)
 
 
 -- 5. Retrieve the names of students using a limit of 2, starting from the 3rd student.
