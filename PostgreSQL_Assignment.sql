@@ -57,11 +57,14 @@ SELECT * FROM students
 INSERT INTO students (student_id, student_name, age, email, frontend_mark,backend_mark, status) VALUES (7, 'Fahad', 23, 'fahad@mail.com', 55, 57, NULL)
 
 -- 2. Retrieve the names of all students who are enrolled in the course titled 'Next.js'.
-
+-- SELECT * FROM students WHERE
 
 -- 3. Update the status of the student with the highest total (frontend_mark + backend_mark) to 'Awarded'.
 -- 4. Delete all courses that have no students enrolled.
 -- 5. Retrieve the names of students using a limit of 2, starting from the 3rd student.
 -- 6. Retrieve the course names and the number of students enrolled in each course.
 -- 7. Calculate and display the average age of all students.
+SELECT avg(age) as average_age FROM students
+
 -- 8. Retrieve the names of students whose email addresses contain 'example.com'.
+SELECT * FROM students WHERE email LIKE '%example.com'
