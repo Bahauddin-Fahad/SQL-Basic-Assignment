@@ -49,6 +49,10 @@ course_id  INT REFERENCES courses(course_id) NOT NULL
 
 SELECT * FROM students
 
+SELECT * FROM courses
+
+SELECT * FROM enrollment
+
 
 
 
@@ -60,9 +64,17 @@ INSERT INTO students (student_id, student_name, age, email, frontend_mark,backen
 -- SELECT * FROM students WHERE
 
 -- 3. Update the status of the student with the highest total (frontend_mark + backend_mark) to 'Awarded'.
+
+
 -- 4. Delete all courses that have no students enrolled.
+
+
 -- 5. Retrieve the names of students using a limit of 2, starting from the 3rd student.
+SELECT student_id,student_name FROM students ORDER BY student_id LIMIT 2 OFFSET 2
+
 -- 6. Retrieve the course names and the number of students enrolled in each course.
+-- SELECT course_name,sum(student_id) FROM enrollment JOIN courses on courses.course_id=enrollment.course_id
+
 -- 7. Calculate and display the average age of all students.
 SELECT avg(age) as average_age FROM students
 
