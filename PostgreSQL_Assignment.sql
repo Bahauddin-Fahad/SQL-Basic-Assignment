@@ -64,7 +64,8 @@ INSERT INTO students (student_id, student_name, age, email, frontend_mark,backen
 -- SELECT * FROM students WHERE
 
 -- 3. Update the status of the student with the highest total (frontend_mark + backend_mark) to 'Awarded'.
-
+UPDATE students SET status='Awarded' WHERE (frontend_mark+backend_mark) = 
+(SELECT max(frontend_mark+backend_mark) FROM students)
 
 -- 4. Delete all courses that have no students enrolled.
 DELETE FROM courses WHERE course_id NOT IN 
