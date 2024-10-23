@@ -47,12 +47,11 @@ course_id  INT REFERENCES courses(course_id) NOT NULL
 -- (3, 2, 1),
 -- (4, 3, 2);
 
-SELECT * FROM students
+-- SELECT * FROM students
 
-SELECT * FROM courses
+-- SELECT * FROM courses
 
-SELECT * FROM enrollment
-
+-- SELECT * FROM enrollment
 
 
 
@@ -85,7 +84,7 @@ ORDER BY student_id LIMIT 2 OFFSET 2
 
 -- 6. Retrieve the course names and the number of students enrolled in each course.
 
-SELECT course.course_name, COUNT(enrollment.student_id) as students
+SELECT courses.course_name, COUNT(enrollment.student_id) as students
 FROM courses
 LEFT JOIN enrollment ON courses.course_id = enrollment.course_id
 GROUP BY courses.course_name;
@@ -96,7 +95,7 @@ GROUP BY courses.course_name;
 
 
 -- 7. Calculate and display the average age of all students.
-SELECT round(avg(age)) as average_age FROM students
+SELECT round(AVG(age)) as average_age FROM students
 
 -- 8. Retrieve the names of students whose email addresses contain 'example.com'.
 SELECT * FROM students 
