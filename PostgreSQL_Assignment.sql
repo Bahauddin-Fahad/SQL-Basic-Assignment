@@ -98,5 +98,5 @@ GROUP BY courses.course_name;
 SELECT round(AVG(age)) as average_age FROM students
 
 -- 8. Retrieve the names of students whose email addresses contain 'example.com'.
-SELECT * FROM students 
+SELECT student_name,email FROM students 
 WHERE email LIKE '%example.com'
