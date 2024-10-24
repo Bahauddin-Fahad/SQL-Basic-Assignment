@@ -79,14 +79,13 @@ DELETE FROM courses WHERE course_id NOT IN
 
 
 -- 5. Retrieve the names of students using a limit of 2, starting from the 3rd student.
-SELECT student_id,student_name FROM students 
+SELECT student_name FROM students 
 ORDER BY student_id LIMIT 2 OFFSET 2
 
 -- 6. Retrieve the course names and the number of students enrolled in each course.
-
-SELECT courses.course_name, COUNT(enrollment.student_id) as students
+SELECT course_name, COUNT(enrollment.student_id) as students
 FROM courses
-LEFT JOIN enrollment ON courses.course_id = enrollment.course_id
+NATURAL JOIN enrollment 
 GROUP BY courses.course_name;
 
 
@@ -95,8 +94,8 @@ GROUP BY courses.course_name;
 
 
 -- 7. Calculate and display the average age of all students.
-SELECT round(AVG(age)) as average_age FROM students
+SELECT round(AVG(age),2) as average_age FROM students
 
 -- 8. Retrieve the names of students whose email addresses contain 'example.com'.
-SELECT student_name,email FROM students 
+SELECT student_name FROM students 
 WHERE email LIKE '%example.com'
